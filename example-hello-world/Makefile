@@ -1,7 +1,8 @@
 VENV=./venv/bin/activate
+MAIN=helloworld
 
-demo: $(VENV)
-	. $(VENV); pex . -r requirements.txt --no-wheel -c demo.py -o demo --python-shebang='#!/usr/bin/env python'
+$(MAIN): $(VENV)
+	. $(VENV); pex . -r requirements.txt --no-wheel -c $@.py -o $@ --python-shebang='#!/usr/bin/env python'
 
 $(VENV): requirements.txt
 	test -d venv || virtualenv venv
@@ -11,4 +12,4 @@ $(VENV): requirements.txt
 .PHONY: clean
 
 clean:
-	rm -rf demo venv
+	rm -rf $(MAIN) venv

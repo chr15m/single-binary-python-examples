@@ -3,9 +3,9 @@
 
 from __future__ import print_function
 
-import sh
 from sys import version
+from platform import uname
 
-print("Hello world from a Python agnostic binary!")
-print("Python version:", version)
-print("Uname:", sh.uname("-a"))
+print("Hello world! From a Python agnostic binary.")
+print("Python version:", version.replace("\n", ""))
+print("OS version:", " ".join(uname()))

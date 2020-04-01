@@ -1,3 +1,7 @@
+from __future__ import print_function
+
+from os.path import join, dirname
+from os import getcwd
 import platform
 
 # conditionally import based on py2 vs py3
@@ -28,14 +32,17 @@ class H(SimpleHTTPServer.SimpleHTTPRequestHandler):
         qs = parse_qs(url.query)
         host = qs.get("ping")
         if host:
+            ct = "text/plain"
             try:
                 res = str(sh.ping("-c", "1", host))
             except Exception:
                 res = "Couldn't ping " + host
         else:
-            res = "Hello world!\nUse ?ping=HOST to ping a host."
+            ct = "text/html"
+            with open(join(dirname(__file__), "pages", "index.html")) as f:
+                res = f.read()
         self.send_response(200)
-        self.send_header("Content-type", "text/plain")
+        self.send_header("Content-type", ct)
         self.send_header("Content-length", len(res))
         self.end_headers()
         self.wfile.write(bytearray(res, "utf8"))

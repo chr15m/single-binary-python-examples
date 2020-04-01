@@ -13,11 +13,14 @@ except:
 import click
 import sh
 
+from mymodule import hello as h
+
 @click.command()
-@click.option('--echo', '-s', help='Output some text to the console.')
+@click.option('--echo', '-e', help='Output some text to the console.')
 @click.option('--fetch-title', '-f', help='Fetch a web URL and show the title of the page.')
+@click.option('--hello', '-h', is_flag=True, help='Print the value of mymodule.hello.')
 @click.option('--arp', '-a', is_flag=True, help='Print the arp table of this computer.')
-def main(echo, fetch_title, arp):
+def main(echo, fetch_title, hello, arp):
     if echo:
         print("Your message:", echo)
     if fetch_title:
@@ -26,9 +29,11 @@ def main(echo, fetch_title, arp):
             print(titles[0])
         else:
             print("No title found.")
+    if hello:
+        print("mymodule.hello =", h)
     if arp:
         print(sh.arp("-a").rstrip())
-    if not (echo or fetch_title or arp):
+    if not (echo or fetch_title or arp or hello):
         print("You didn't specify any options. Use --help to get help.")
 
 if __name__ == "__main__":

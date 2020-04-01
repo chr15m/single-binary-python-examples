@@ -4,3 +4,5 @@ venv
 helloworld
 example-cli
 webserver
+*.pyc
+__pycache__

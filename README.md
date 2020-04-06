@@ -16,3 +16,11 @@ completely version independent by coding defensively and conservatively.
 # Build
 
 Each script can be built by going into the `example-*` folder and running `make`.
+
+# Bundling architecture specific wheels
+
+It's possible to bundle in wheels containing compiled C code for multiple architectures. Check out the [pex](https://pex.readthedocs.io/en/stable/buildingpex.html#platform) documentation for more details.
+
+# Bundling external resources
+
+It's possible to bundle external resources such as images and HTML files into your single binary. Check [example-http-server](./example-http-server) for more details.
